@@ -8,6 +8,11 @@
     <style>
         /* Styles CSS peuvent être ajoutés ici */
 
+
+
+
+
+
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -235,14 +240,40 @@
         /* Autres styles... */
     </style>
 
-
-
     <!-- Include web3.js library -->
-    <script src="https://cdn.jsdelivr.net/npm/web3@1.3.5/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@4.8.0/dist/web3.min.js"></script>
+
+    <!-- Insérez les modifications pour MetaMask ici -->
+    <script>
+        // Initialize web3
+        if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+        } else {
+            // Gérer le cas où l'utilisateur n'a pas MetaMask installé
+            alert("Please install MetaMask to interact with this page.");
+        }
+
+        // Remplacer l'événement 'close' par 'disconnect'
+        if (typeof window.ethereum !== 'undefined') {
+            window.ethereum.on('disconnect', (error) => {
+                // Gérer la déconnexion de MetaMask ici
+            });
+        }
+    </script>
+
 </head>
 
 <body>
 
+    <p>
+        <a href="https://www.dropzonecrypto.com/" target="_blank" rel="noopener noreferrer">
+            <img src="images\logo.png" alt="Your Company Logo"
+                style="max-width: 100px; display: block; margin: 0 auto;">
+            <span
+                style="display: block; text-align: center; font-size: 25px; color: rgb(252, 251, 251); font-weight: bold;">Back
+                To Drop Zone Home Base</span>
+        </a>
+    </p>
 
 
 
