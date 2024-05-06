@@ -73,21 +73,6 @@
             }
         }
 
-        /* Styles CSS pour les éléments de la page */
-
-        /* Style pour le conteneur principal */
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: hsla(0, 0%, 100%, 0.771);
-            /* Couleur de fond */
-            border-radius: 10px;
-            /* Bordure arrondie */
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            /* Ombre portée */
-        }
-
         /* Style pour le titre principal */
         h1 {
             font-size: 20px;
@@ -204,6 +189,53 @@
             /* Couleur du texte */
         }
     </style>
+
+
+
+
+
+
+    <style>
+        /* Ajoutez ces styles CSS pour éviter le chevauchement et rendre la mise en page responsive */
+
+        /* Styles pour le logo et le bouton de connexion */
+        .header {
+            position: absolute;
+            top: 20px;
+        }
+
+        .header.left {
+            left: 20px;
+        }
+
+        .header.right {
+            right: 20px;
+        }
+
+        /* Styles pour le conteneur principal */
+        .container {
+            max-width: 800px;
+            margin: 200px auto 40px auto;
+            /* Ajoute une marge en haut pour éviter le chevauchement */
+            padding: 20px;
+            background-color: hsla(0, 0%, 100%, 0.667);
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Ajoutez des media queries pour rendre la mise en page responsive */
+        @media only screen and (max-width: 600px) {
+            .container {
+                margin-top: 100px;
+                /* Réduisez la marge en haut pour les petits écrans */
+            }
+        }
+    </style>
+
+
+
+
+
     <style>
         /* Styles CSS pour les éléments de la page */
 
@@ -240,8 +272,6 @@
         /* Autres styles... */
     </style>
 
-    <!-- Include web3.js library -->
-    <script src="https://cdn.jsdelivr.net/npm/web3@4.8.0/dist/web3.min.js"></script>
 
     <!-- Insérez les modifications pour MetaMask ici -->
     <script>
@@ -259,22 +289,71 @@
                 // Gérer la déconnexion de MetaMask ici
             });
         }
+
+        window.addEventListener('load', async () => {
+            if (window.ethereum) {
+                try {
+                    await window.ethereum.enable();
+                } catch (error) {
+                    alert("Please allow access to your MetaMask account.");
+                }
+            } else {
+                alert("Please install MetaMask to interact with this page.");
+            }
+        });
+
     </script>
 
+
+
+
+
+
+
+
+
+    <script>
+        // Fonction pour se connecter à MetaMask
+        async function connectMetaMask() {
+            if (window.ethereum) {
+                try {
+                    // Demander à MetaMask l'autorisation de se connecter
+                    await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    // MetaMask est connecté
+                    alert("MetaMask connected successfully!");
+                } catch (error) {
+                    // L'utilisateur a refusé la connexion ou une erreur s'est produite
+                    alert("Failed to connect to MetaMask: " + error.message);
+                }
+            } else {
+                // MetaMask n'est pas installé
+                alert("MetaMask is not installed.");
+            }
+        }
+    </script>
 </head>
+
+
+
 
 <body>
 
-    <p>
-        <a href="https://www.dropzonecrypto.com/" target="_blank" rel="noopener noreferrer">
-            <img src="images\logo.png" alt="Your Company Logo"
-                style="max-width: 100px; display: block; margin: 0 auto;">
-            <span
-                style="display: block; text-align: center; font-size: 25px; color: rgb(252, 251, 251); font-weight: bold;">Back
-                To Drop Zone Home Base</span>
-        </a>
-    </p>
 
+
+    <div style="position: absolute; top: 20px; right: 20px;">
+        <!-- Bouton Connect MetaMask -->
+        <button onclick="connectMetaMask()">Connect MetaMask</button>
+    </div>
+
+
+    <!-- Include web3.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+
+
+    <p>
+
+    </p>
+    <br><br>
 
 
     <div class="container">
