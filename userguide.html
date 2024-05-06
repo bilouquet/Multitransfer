@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MultiSender User Guide</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('images/fond2.jpg');
+            /* Remplacez 'background.jpg' par le chemin de votre image de fond */
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #333;
+        }
+
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #9b00b7;
+            color: #ffffff;
+        }
+
+        button:hover {
+            background-color: #be2ff3;
+        }
+    </style>
+    <style>
+        /* Style pour les éléments <strong> */
+        strong {
+            color: #6c19f2;
+            /* Couleur rouge */
+            font-size: 18px;
+            /* Taille de police de 18 pixels */
+        }
+    </style>
+
+
+    <style>
+        /* Styles pour le texte défilant */
+        .scrolling-text-container {
+            width: 100%;
+            overflow: hidden;
+            position: absolute;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .scrolling-text {
+            white-space: nowrap;
+            animation: scroll 15s linear infinite;
+        }
+
+        /* Animation pour faire défiler le texte */
+        @keyframes scroll {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="container">
+        <button onclick="goToIndex()">Back to the Multi-sender</button>
+        <h1>Drop Zone MultiSender User Guide</h1>
+        <p>Welcome Dear Crypto Fans. This platform allows you to send ERC20 tokens to multiple accounts in a single
+            transaction on the Ethereum blockchain. Follow these simple steps to use this tool effectively:</p>
+
+        <h2>Accessing the System:</h2>
+        <p>Make sure you have installed MetaMask or any other compatible Ethereum wallet extension on your browser.</p>
+
+        <h2>Connecting to Your Ethereum Account:</h2>
+        <p>Log in to your Ethereum account via MetaMask by selecting the Ethereum Mainnet network.</p>
+
+        <h2>Entering Information:</h2>
+        <p>Fill in the required fields:</p>
+        <ul>
+
+            <li><strong>Token Address:</strong> The address of the ERC20 token you want to send.</li>
+            <li><strong>Accounts = 145 Maximum:</strong> The Ethereum addresses of the recipients, separated by line
+                breaks.</li>
+            <li><strong>Amounts:</strong> The number of tokens to send to each recipient, separated by line breaks.</li>
+        </ul>
+
+        <h2>Sending the Transaction:</h2>
+        <p>Click the "MultiSend" button to send the transaction. You will be prompted to CONFIRM THE TRANSACTION VIA
+            METAMASK, (Cost of a standard single transaction on the Ethereum blockchain).</p>
+
+        <h2>Transaction Confirmation:</h2>
+        <p>Once the transaction is confirmed, the tokens will be sent to the specified accounts.</p>
+
+        <h2>Tracking the Transaction:</h2>
+        <p>You can track the status of the transaction using block explorers such as Etherscan via the link below.</p>
+        <ul>
+            <li><a href="https://etherscan.io/address/0xa5025faba6e70b84f74e9b1113e5f7f4e7f4859f"
+                    target="_blank">Mainnet
+                    Transaction</a></li>
+
+        </ul>
+        <p>That's it! You have now successfully used the MultiSender tool to send your tokens to multiple accounts in a
+            single transaction. Enjoy this convenient feature for managing your token distributions or performing bulk
+            sends effortlessly on the Ethereum blockchain.</p>
+
+        <h2>Formatting Data for Bulk Transfers:</h2>
+        <p>When using the Drop Zone MultiSender tool, you have the option to provide the recipient addresses and
+            corresponding token amounts in either JSON or CSV format. Here's how to format your data:</p>
+
+        <h3>Exemple JSON :</h3>
+        <p>Utilisez le format JSON lorsque vous spécifiez les adresses des destinataires et les montants de jetons en
+            tant que paires clé-valeur.</p>
+
+        <pre style="font-size: 16px;">
+            {
+              "recipient_address_1": "amount_1",
+              "recipient_address_2": "amount_2",
+              "recipient_address_3": "amount_3",
+              ...
+            }
+            </pre>
+
+        <h3>Exemple CSV :</h3>
+        <p>Utilisez le format CSV lorsque vous spécifiez les adresses des destinataires et les montants de jetons en
+            tant que valeurs séparées par des virgules.</p>
+
+        <pre style="font-size: 16px;">
+            recipient_address_1,amount_1
+            recipient_address_2,amount_2
+            recipient_address_3,amount_3
+            ...
+            </pre>
+
+        <h2>Using the Formatted Data:</h2>
+        <p>Copy and paste your formatted data into the designated text area on the Drop Zone MultiSender platform.
+            Ensure that each recipient address and token amount is correctly formatted and separated by either a comma
+            (for CSV) or a colon (for JSON).</p>
+        <br>
+
+        <!-- Ligne de texte défilante -->
+        <div class="scrolling-text">
+            Thank you... We wish you great success in
+            your Crypto Projects!
+        </div>
+
+
+        <br>
+
+
+
+        <!-- Bouton pour retourner au Multi-sender -->
+        <button onclick="goToIndex()">Back to the Multi-sender</button>
+    </div>
+
+    <script>
+        function goToIndex() {
+            window.location.href = "index.html"; // Remplacez "index.html" par le chemin de votre page d'accueil
+        }
+    </script>
+</body>
+
+</html>
