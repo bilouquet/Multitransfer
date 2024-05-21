@@ -161,11 +161,6 @@
         }
     </style>
 
-
-
-
-
-
     <style>
         /* Ajoutez ces styles CSS pour éviter le chevauchement et rendre la mise en page responsive */
 
@@ -241,19 +236,6 @@
 
 
     <!-- Insérez les modifications pour MetaMask ici -->
-    <script>
-        if (typeof web3 !== 'undefined') {
-            web3 = new Web3(web3.currentProvider);
-        } else {
-            alert("Please install MetaMask to interact with this page.");
-        }
-
-        if (typeof window.ethereum !== 'undefined') {
-            window.ethereum.on('disconnect', (error) => {
-                // Gérer la déconnexion de MetaMask ici
-            });
-        }
-    </script>
 
     <script>
         // Fonction pour se connecter à MetaMask
@@ -429,13 +411,7 @@
             updateGasPrice();
         };
 
-        // Initialize web3
-        if (typeof web3 !== 'undefined') {
-            web3 = new Web3(web3.currentProvider);
-        } else {
-            // Handle the case where the user doesn't have Metamask installed
-            alert("Please install Metamask to interact with this page.");
-        }
+
 
         // Set the contract address
         const contractAddress = "0xA5025FABA6E70B84F74e9b1113e5F7F4E7f4859f"; // Remplacez par l'adresse de votre contrat
