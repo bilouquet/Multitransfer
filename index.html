@@ -11,18 +11,13 @@
     <style>
         /* Styles CSS peuvent être ajoutés ici */
 
-
-
         body {
             font-family: Arial, sans-serif;
-
-
-
             text-align: center;
             margin: 80px 0 40px 0;
             /* Ajoute une marge de 80 pixels en haut et 40 pixels en bas */
             padding: 20px;
-            background-image: url('images/fond5.jpg');
+            background-image: linear-gradient(to bottom right, #4a90e2, #5edc1f, #b74cff);
             background-size: cover;
             background-position: center;
         }
@@ -38,7 +33,7 @@
 
         button {
             padding: 20px 30px;
-            background-color: #4CAF50;
+            background-color: #ef0cbefc;
             color: white;
             border: none;
             border-radius: 5px;
@@ -47,7 +42,7 @@
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: #27bb2e;
         }
 
         .scrolling-text {
@@ -108,8 +103,8 @@
 
         /* Style pour les boutons */
         button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
+            padding: 10px 30px;
+            background-color: hsl(201, 93%, 44%);
             /* Couleur de fond */
             color: white;
             /* Couleur du texte */
@@ -121,7 +116,7 @@
         }
 
         button:hover {
-            background-color: #45a049;
+            background-color: hsl(309, 93%, 48%);
             /* Couleur de fond au survol */
         }
 
@@ -162,34 +157,6 @@
 
         .scrolling-text {
             animation: glowing 1s ease-in-out infinite;
-        }
-
-        /* Style pour le conteneur des informations sur les frais de gaz */
-        .gas-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f2f2f2;
-            /* Couleur de fond */
-            border-radius: 10px;
-            /* Bordure arrondie */
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            /* Ombre portée */
-            margin-top: 20px;
-        }
-
-        /* Style pour le titre des informations sur les frais de gaz */
-        .gas-title {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: #060606;
-            /* Couleur du texte */
-        }
-
-        /* Style pour le texte des informations sur les frais de gaz */
-        #gasPriceContainer {
-            color: #090909;
-            /* Couleur du texte */
         }
     </style>
 
@@ -235,10 +202,6 @@
         }
     </style>
 
-
-
-
-
     <style>
         /* Styles CSS pour les éléments de la page */
 
@@ -278,42 +241,18 @@
 
     <!-- Insérez les modifications pour MetaMask ici -->
     <script>
-        // Initialize web3
         if (typeof web3 !== 'undefined') {
             web3 = new Web3(web3.currentProvider);
         } else {
-            // Gérer le cas où l'utilisateur n'a pas MetaMask installé
             alert("Please install MetaMask to interact with this page.");
         }
 
-        // Remplacer l'événement 'close' par 'disconnect'
         if (typeof window.ethereum !== 'undefined') {
             window.ethereum.on('disconnect', (error) => {
                 // Gérer la déconnexion de MetaMask ici
             });
         }
-
-        window.addEventListener('load', async () => {
-            if (window.ethereum) {
-                try {
-                    await window.ethereum.enable();
-                } catch (error) {
-                    alert("Please allow access to your MetaMask account.");
-                }
-            } else {
-                alert("Please install MetaMask to interact with this page.");
-            }
-        });
-
     </script>
-
-
-
-
-
-
-
-
 
     <script>
         // Fonction pour se connecter à MetaMask
@@ -340,21 +279,31 @@
 
 
 <body>
+    <!-- Lien vers Drop Zone Home Base -->
+    <a id="link1" class="link" href="https://www.dropzonecrypto.com/"
+        style="position: absolute; top: 20px; left: 20px; font-size: 20px; color: #f1f4f1; text-decoration: none;">
+        <img src="images/logo.png" alt="Image 1" style="width: 40px; height: 40px; margin-right: 5px;">Drop Zone
+    </a>
 
-    <!-- Lien avec la citation -->
-    <a href="https://www.dropzonecrypto.com/"
-        style="position: absolute; top: 20px; left: 20px; font-size: 25px; color: #f1f4f1; text-decoration: none;">Back
-        to Drop Zone Home Base</a>
-    <!-- Le reste de votre contenu -->
+    <!-- Lien supplémentaire identique -->
+    <a id="link2" class="link" href="Tools.html"
+        style="position: absolute; top: 20px; left: 300px; font-size: 20px; color: #f1f4f1; text-decoration: none;">
+        <img src="images/tools.png" alt="Image 2" style="width: 40px; height: 40px; margin-right: 5px;">Tools
+    </a>
 
-    <div style="position: absolute; top: 20px; right: 20px;">
+    <!-- Lien supplémentaire identique -->
+    <a id="link2" class="link" href="userguide.html"
+        style="position: absolute; top: 20px; left: 500px; font-size: 20px; color: #f1f4f1; text-decoration: none;">
+        <img src="images\tutorial.png" alt="Image 2" style="width: 40px; height: 40px; margin-right: 5px;">Tutorial
+    </a>
+
+    <div id="metamask-button" style="position: absolute; top: 20px; right: 20px;">
         <!-- Bouton Connect MetaMask -->
-        <button onclick="connectMetaMask()">Connect MetaMask</button>
+        <button onclick="connectMetaMask()">Connect your wallet</button>
     </div>
 
-
     <!-- Include web3.js library -->
-    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+
 
 
     <p>
@@ -414,18 +363,10 @@
             mandatory but appreciated! Thank you for your support and trust.
         </p>
     </div>
-    <br><br>
-    <p><!-- Remplacer le texte par votre logo -->
-        <a href="userguide.html" target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
-            <img src="images\logo.png" alt="Your Company Logo"
-                style="max-width: 100px; display: block; margin: 0 auto;">
-            <span style="display: block; text-align: center; font-size: 30px; color: #ffffff; font-weight: bold;">My
-                Tutorial</span>
-        </a>
-    </p>
+
     </p>
     </div>
-    <br><br>
+    <br>
     <!-- Ligne de texte défilante -->
     <div class="scrolling-text">
         Thank you... We wish you great success in
