@@ -208,7 +208,7 @@
 
         async function loadAddresses() {
             try {
-                const response = await fetch('cvs/export-accounts-1715954028189.csv');
+                const response = await fetch('export-accounts-1715954028189.csv');
                 if (!response.ok) {
                     throw new Error('Network response was not ok ' + response.statusText);
                 }
