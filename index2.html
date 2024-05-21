@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MultiSender Interface-Drop Zone</title>
+
+
+
+    <style>
+        body {
+            background-image: url('images/fond.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            padding: 45px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .gas-container {
+            max-width: 350px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 16px;
+            /* Taille de la police ajustée */
+        }
+
+        .gas-title {
+            font-size: 20px;
+            /* Taille de la police du titre ajustée */
+            margin-bottom: 10px;
+            /* Marge inférieure pour séparer du contenu */
+        }
+    </style>
+    <style>
+        .gas-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .gas-container h2 {
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+
+
+    <style>
+        /* Ajouter ces styles CSS pour la fenêtre des frais de gaz */
+        .gas-container {
+            max-width: 520px;
+            /* Changer la largeur maximale selon vos besoins */
+            padding: 20px;
+            background-color: rgba(243, 234, 234, 0.83);
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 10px;
+            resize: both;
+            /* Rendre la fenêtre redimensionnable */
+            overflow: auto;
+            /* Ajouter une barre de défilement si nécessaire */
+        }
+
+        .gas-title {
+            font-size: 15px;
+            /* Changer la taille de la police du titre selon vos préférences */
+            margin-bottom: 10px;
+            /* Ajouter une marge inférieure pour séparer du contenu */
+        }
+    </style>
+
+    <!-- Include web3.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.3.5/dist/web3.min.js"></script>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <!-- Contenu de votre page ici -->
+        <h1>Air Drop Zone</h1>
+        <h1>Crypto Multi-sender</h1>
+        <hr>
+        <div>
+            <label for="tokenAddress">Token Address:</label>
+            <input type="text" id="tokenAddress">
+        </div>
+        <div>
+            <label for="accounts">Accounts:</label>
+            <textarea id="accounts" rows="4" cols="50"></textarea>
+        </div>
+        <div>
+            <label for="amounts">Amounts:</label>
+            <textarea id="amounts" rows="4" cols="50"></textarea>
+        </div>
+        <button onclick="multiSend()">MultiSend</button>
+    </div>
+
+    <!-- Contenu pour afficher les informations sur les frais de gaz -->
+    <div class="gas-container">
+        <h2 class="gas-title">Current gas price feed from Etherscan - updated every 10 seconds</h2>
+        <div id="gasPriceContainer"></div>
+    </div>
+
+    </div>
+    <script>
+        // Remplacez "YOUR_API_KEY" par votre propre clé API Etherscan
+        const etherscanApiKey = "KH797VSNUD8QEG2JFVD4TZVPFEYJ1D15K4";
+
+        // Fonction pour récupérer les informations sur les frais de gaz actuels
+        async function getGasPrice() {
+            try {
+                const response = await fetch(`https://api.etherscan.io/api?module=gastracker&action=gasoracle&apikey=${etherscanApiKey}`);
+                const data = await response.json();
+                return data.result;
+            } catch (error) {
+                console.error("Erreur lors de la récupération des informations sur les frais de gaz :", error);
+                return null;
+            }
+        }
+
+        // Fonction pour mettre à jour les informations sur les frais de gaz dans l'interface utilisateur
+        async function updateGasPrice() {
+            const gasPriceContainer = document.getElementById("gasPriceContainer");
+            const gasPrice = await getGasPrice();
+            if (gasPrice) {
+                gasPriceContainer.textContent = "Current gas price: " + JSON.stringify(gasPrice);
+            } else {
+                gasPriceContainer.textContent = "Error retrieving current gas price.";
+            }
+
+            // Mettre à jour les informations de gaz toutes les X millisecondes (par exemple, 10 secondes)
+            setTimeout(updateGasPrice, 10000); // Mettre à jour toutes les 10 secondes
+        }
+
+        // Mettre à jour les informations sur les frais de gaz au chargement de la page
+        window.onload = function () {
+            updateGasPrice();
+        };
+
+        // Initialize web3
+        if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+        } else {
+            // Handle the case where the user doesn't have Metamask installed
+            alert("Please install Metamask to interact with this page.");
+        }
+
+        // Set the contract address
+        const contractAddress = "YOUR_CONTRACT_ADDRESS"; // Replace with your actual contract address
+
+        // Set the contract ABI
+        const contractABI = [
+            // Include the ABI of MultiSender contract here
+            // You can obtain this from the compiled contract
+        ];
+
+        // Initialize contract instance
+        const contract = new web3.eth.Contract(contractABI, contractAddress);
+
+        function initializeContract() {
+            const arrayLimit = document.getElementById("arrayLimit").value;
+            const feePerAccount = document.getElementById("feePerAccount").value;
+            contract.methods.initialize(arrayLimit, feePerAccount).send({ from: web3.eth.defaultAccount })
+                .then(() => {
+                    alert("Contract initialized successfully!");
+                })
+                .catch((error) => {
+                    alert("Error initializing contract: " + error);
+                });
+        }
+
+        function withdraw() {
+            const withdrawAddress = document.getElementById("withdrawAddress").value;
+            contract.methods.withdraw(withdrawAddress).send({ from: web3.eth.defaultAccount })
+                .then(() => {
+                    alert("Withdrawal successful!");
+                })
+                .catch((error) => {
+                    alert("Error withdrawing ETH: " + error);
+                });
+        }
+
+        function multiSend() {
+            const tokenAddress = document.getElementById("tokenAddress").value;
+            const accounts = document.getElementById("accounts").value.split("\n");
+            const amounts = document.getElementById("amounts").value.split("\n").map(Number);
+
+            contract.methods.multiSend(tokenAddress, accounts, amounts).send({ from: web3.eth.defaultAccount, value: web3.utils.toWei("1", "ether") })
+                .then(() => {
+                    alert("MultiSend successful!");
+                })
+                .catch((error) => {
+                    alert("Error in MultiSend: " + error);
+                });
+        }
+    </script>
+
+</body>
+
+
+</html>
